@@ -1,77 +1,73 @@
-// app.js
-
-const express = require("express");
-const app = express();
-const bodyParser = require("body-parser");
-const db = require("./services/dbConnect");
-const cloudinary = require("cloudinary").v2;
-const routes = require("./routes/routes");
-
-// Middleware
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-
-// Persist Image Endpoint
-app.post("/persist-image", (request, response) => {
-  const data = {
-    title: request.body.title,
-    image: request.body.image,
-  };
-
-  // Upload image to Cloudinary
-  cloudinary.uploader
-    .upload(data.image)
-    .then((image) => {
-      db.pool.connect((err, client) => {
-        const insertQuery =
-          "INSERT INTO images (title, cloudinary_id, image_url) VALUES($1,$2,$3) RETURNING *";
-        const values = [data.title, image.public_id, image.secure_url];
-
-        // Execute query
-        client.query(insertQuery, values)
-          .then((result) => {
-            result = result.rows[0];
-            response.status(201).send({
-              status: "success",
-              data: {
-                message: "Image Uploaded Successfully",
-                title: result.title,
-                cloudinary_id: result.cloudinary_id,
-                image_url: result.image_url,
-              },
-            });
-          })
-          .catch((e) => {
-            response.status(500).send({
-              message: "failure",
-              error: e,
-            });
-          });
-      });
-    })
-    .catch((error) => {
-      response.status(500).send({
-        message: "failure",
-        error: error,
-      });
-    });
-});
-
 // Update Image Endpoint
-app.put("/update-image/:cloudinary_id", (request, response) => {
-  // Implementation...
+app.put("/update-image/:dropbox_id", (request, response) => {
+  const dropboxId = request.params.dropbox_id;
+  const newTitle = request.body.title;
+
+  db.pool.connect((err, client) => {
+    const updateQuery =
+      "UPDATE images SET title = $1 WHERE dropbox_id = $2 RETURNING *";
+    const values = [newTitle, dropboxId];
+
+    client.query(updateQuery, values)
+      .then((result) => {
+        if (result.rows.length === 0) {
+          response.status(404).send({
+            message: "Image not found",
+          });
+        } else {
+          const updatedImage = result.rows[0];
+          response.status(200).send({
+            status: "success",
+            data: {
+              message: "Image Updated Successfully",
+              title: updatedImage.title,
+              dropbox_id: updatedImage.dropbox_id,
+              image_url: updatedImage.image_url,
+            },
+          });
+        }
+      })
+      .catch((e) => {
+        response.status(500).send({
+          message: "failure",
+          error: e,
+        });
+      });
+  });
 });
 
 // Delete Image Endpoint
-app.delete("/delete-image/:cloudinary_id", (request, response) => {
-  // Implementation...
-});
+app.delete("/delete-image/:dropbox_id", (request, response) => {
+  const dropboxId = request.params.dropbox_id;
 
-// Other endpoints...
-app.use("/api", routes);
+  db.pool.connect((err, client) => {
+    const deleteQuery = "DELETE FROM images WHERE dropbox_id = $1 RETURNING *";
+    const values = [dropboxId];
 
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+    client.query(deleteQuery, values)
+      .then((result) => {
+        if (result.rows.length === 0) {
+          response.status(404).send({
+            message: "Image not found",
+          });
+        } else {
+          const deletedImage = result.rows[0];
+          response.status(200).send({
+            status: "success",
+            data: {
+              message: "Image Deleted Successfully",
+              title: deletedImage.title,
+              dropbox_id: deletedImage.dropbox_id,
+              image_url: deletedImage.image_url,
+            },
+          });
+        }
+      })
+      .catch((e) => {
+        response.status(500).send({
+          message: "failure",
+          error: e,
+        });
+      });
+  });
 });
