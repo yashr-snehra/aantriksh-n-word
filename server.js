@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Serve static files (your frontend)
-app.use(express.static('final project/loginpage'));
+app.use(express.static('login'));
 
 // Database connection
 mongoose.connect('mongodb://localhost:27017/mydatabase', {
