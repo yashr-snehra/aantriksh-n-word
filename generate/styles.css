@@ -1,0 +1,91 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #333; /* Darkened background color */
+}
+.stickerEffect {
+  border: 10px solid red;
+}
+
+.container {
+  width: 90%;
+  max-width: 600px;
+  margin: 30px auto;
+  background-color: #444; /* Darkened container background */
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Darkened shadow */
+  box-sizing: border-box;
+}
+
+.title {
+  text-align: center;
+  color: #eee; /* Lightened title color */
+}
+
+.preview {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.tagline {
+  font-style: italic;
+  color: #ccc; /* Lightened tagline color */
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #ddd; /* Lightened label color */
+}
+
+.dropdown,
+.tokenInput,
+.generateButton {
+  width: 100%;
+  padding: 12px;
+  border-radius: 5px;
+  border: 1px solid #666; /* Darkened border color */
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.generateButton {
+  background-color: #7C4D85; /* Darkened generate button background */
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Darkened button shadow */
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.generateButton:hover {
+  background-color: #A367B1; /* Adjusted button hover color */
+  transform: scale(1.05);
+}
+
+/* Additional features and styles */
+body {
+  --primary-color: #0C356A;
+  /* background-image: linear-gradient(to bottom right, #392467, #FFD1E3); */ /* Darkened background gradient */
+}
+
+/* Update form element colors */
+.dropdown,
+.tokenInput {
+  background-color: #555; /* Darkened form element background */
+  border: 1px solid #888; /* Darkened form element border */
+  color: #ddd; /* Lightened form element color */
+}
+
+/* Change text color for selected options in dropdown */
+.dropdown option:checked {
+  color: #A367B1;
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cardano Payment System</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>@import url('https://fonts.googleapis.com/css2?family=Arial&display=swap');</style>
+</head>
+<body>
+  <div class="container">
+    <div class="subscription-form">
+      <h1>Subscription Plans</h1>
+      <form id="subscriptionForm">
+        <div class="form-group">
+          <label for="txnId">Enter Transaction ID:</label><br>
+          <input type="text" id="txnId" placeholder="Transaction ID" required>
+        </div>
+        <div class="form-group">
+          <label for="subscriptionPlan">Choose Subscription Plan:</label><br>
+          <select id="subscriptionPlan" required>
+            <option value="1">1 Month - 50 ADA</option>
+            <option value="3">3 Months - 140 ADA</option>
+          </select>
+        </div>
+        <button type="submit" id="subscribeButton">Subscribe</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('subscriptionForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const transactionId = document.getElementById('txnId').value;
+      const subscriptionPlan = document.getElementById('subscriptionPlan').value;
+
+      fetch('/api/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ transactionId, subscriptionPlan })
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        alert(data.message);
+      })
+      .catch(error => console.error('Error:', error));
+    });
+  </script>
+</body>
+</html>

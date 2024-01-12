@@ -1,0 +1,37 @@
+https://ck.ubecdev.com/
+Once they pay they can upload their shit,
+ we make a page for them to display their
+ NFTs and then they can upload their shit 
+to service LIKE DROPBOX if not Dropbox a 
+custom filesystem through which we read 
+data and display as stickers on the said 
+page for end users
+
+payment gate for nft-website/app
+Download the Program or discord bot. Add your projects policy id, so we have the collection. After that, add the link to the extra layers and boom…everything is set up and everyone can use it. 
+
+Founders pay a small fee monthly to use it. 
+
+That is how we could generate monthly income. I would suggest that we think in general about options like that. Like that you could easily earn some hundred ada per month.
+
+^ Need to incorporate this on the same idea
+Reference: https://ck.ubecdev.com/
+Origin of the pfp
+The origin of the files should be from a external source like 
+https://pool.pm/asset1r5vcyd5xf80p6nqztnh9ujek6zd02u857yx003
+or
+https://cnft.tools/chilledkongs
+or whatever is better
+3. The source of the additional files should be the Dropbox service. The host creates a folder 
+there, containing all the files. Each folder may include different types of files, similar to the 
+example. Additionally, each folder contains multiple versions of the same extra file, reflecting 
+various fur colors.
+We aim to produce more of these extra files over time. Every time we're satisfied with a new 
+one, I simply create a new folder on Dropbox and drag-and-drop the new file into it. The 
+website automatically receives a new folder, allowing users to work with it instantly
+. Fur and Metadata
+As mentioned earlier, each folder can contain more than just one file. This happens, for 
+instance, when there's colored fur involved. When the user inputs the NFT number, the 
+program should also check the necessary metadata, such as fur color or, in this example, the 
+breed. In the Dropbox folder, it will search for the correct breed name and select that file
+
